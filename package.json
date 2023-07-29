@@ -1,0 +1,21 @@
+{
+  "name": "powerapps-playwright",
+  "version": "1.0.0",
+  "description": "Test Automation - Playwright trial on PowerApps",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test --config=playwright.config.ts --headed"
+  },
+  "keywords": [
+    "test",
+    "automation",
+    "playwright",
+    "powerapps"
+  ],
+  "author": "Joren Janssens",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.36.2",
+    "prettier": "^3.0.0"
+  }
+}
