@@ -5,3 +5,7 @@ Test Automation trial on PowerApps using Playwright
 run the following commands:
 npm init
 npm install @playwright/test prettier
+
+# execute scripts
+use the following command:
+npm run test
