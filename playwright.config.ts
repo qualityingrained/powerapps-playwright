@@ -6,8 +6,8 @@ const config: PlaywrightTestConfig = {
     use: {
         headless: true,
         viewport: {
-            width: 1920,
-            height: 1080
+            width: 1900,
+            height: 1050
         },
         actionTimeout: 15000,
         ignoreHTTPSErrors: true,
@@ -16,8 +16,8 @@ const config: PlaywrightTestConfig = {
     },
     projects: [
         {
-            name: 'Chrome', 
-            use: { browserName: 'chromium'}
+            name: 'Firefox', 
+            use: { browserName: 'firefox'}
         }
     ]
 }

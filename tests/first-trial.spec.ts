@@ -25,8 +25,14 @@ test.describe('Basic Access Test', () => {
        await sideMenu.navigateToAccounts()
        await accounts.createNewAccount()
        await newAccount.searchForEnterprise('Belfius')
-       await newAccount.selectEnterpriseFromFindAccounts(1)
-       await newAccount.assertEnterpriseDetails()
+       var enterpriseData = await newAccount.selectEnterpriseFromFindAccounts()
+       console.log(enterpriseData)
+       if (enterpriseData['existing']) {
+        await accounts.assertAccountDetails({"data": "data"})
+       } 
+       else {
+        await newAccount.assertEnterpriseDetails()
+       }
        await newAccount.closeWithoutSaving()
        await page.pause()
     })
