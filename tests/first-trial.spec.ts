@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test'
 import { AuthenticationFlow } from '../page-objects/AuthenticationFlow'
+import { SideMenu } from '../page-objects/Common/SideMenu'
 import { Accounts } from '../page-objects/Accounts/Accounts'
 import { NewAccount } from '../page-objects/Accounts/NewAccount'
 const secrets = require('../secrets.json')
