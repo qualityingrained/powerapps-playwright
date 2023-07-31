@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test'
-const credentials = require('../credentials.json')
+const credentials = require('../secrets.json')
 
 export class AuthenticationFlow {
     readonly page:Page
