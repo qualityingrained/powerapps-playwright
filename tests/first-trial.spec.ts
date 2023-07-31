@@ -3,6 +3,8 @@ import { AuthenticationFlow } from '../page-objects/AuthenticationFlow'
 import { SideMenu } from '../page-objects/sideMenu'
 import { Accounts } from '../page-objects/Accounts/Accounts'
 import { NewAccount } from '../page-objects/Accounts/NewAccount'
+const secrets = require('../secrets.json')
+
 
 test.describe('Basic Access Test', () => {
     let authenticationFlow: AuthenticationFlow
@@ -15,7 +17,7 @@ test.describe('Basic Access Test', () => {
         sideMenu = new SideMenu(page)
         accounts = new Accounts(page)
         newAccount = new NewAccount(page)
-        await page.goto('https://dosp-hsx-uat.crm4.dynamics.com/')
+        await page.goto(secrets['url'])
     })
 
     test('Create Account', async ({page}) => {
