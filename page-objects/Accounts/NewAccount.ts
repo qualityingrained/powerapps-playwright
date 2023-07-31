@@ -66,7 +66,6 @@ export class NewAccount {
         await expect(this.page.getByText(addressLine)).toHaveCount(1)
 
         // capture the VAT number
-        await this.page.pause()
         const vatLine = await this.findAccountsConfirmationPopUp.locator('p#dialogMessageTextLine6_3').innerText()
         const vatMatches = vatLine.match(/VAT: (BE[0-9]{10})/)
         if (vatMatches) {

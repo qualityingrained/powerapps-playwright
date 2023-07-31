@@ -16,8 +16,8 @@ const config: PlaywrightTestConfig = {
     },
     projects: [
         {
-            name: 'Firefox', 
-            use: { browserName: 'firefox'}
+            name: 'Chrome', 
+            use: { browserName: 'chromium'}
         }
     ]
 }
