@@ -141,10 +141,4 @@ export class NewAccount {
         expect(await this.page.getByLabel('Official Address').getByLabel('Postal Code').innerText()).toBe(this.enterprisePostalcode)
         expect(await this.page.getByLabel('Official Address').getByLabel('City').innerText()).toBe(this.enterpriseCity)
     }
-
-    async closeWithoutSaving() {
-        await this.page.getByLabel('Press Enter to go back.').click()
-        await this.page.getByLabel('Press Enter to go back.').click()
-    }
-
 }

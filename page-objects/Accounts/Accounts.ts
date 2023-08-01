@@ -25,14 +25,14 @@ export class Accounts {
         this.ifTradeName = page.locator('input[data-id="name.fieldControl-text-box-text"]')
         this.ifOfficialName = page.locator('section[data-id="ACCOUNT_INFORMATION"]').getByLabel('Official Name', { exact: true })
         this.ifVATNumber = page.locator('section[data-id="ACCOUNT_INFORMATION"]').getByLabel('VAT Number', { exact: true })
-        this.ifMainAddressCountry = page.getByLabel('Main Address', { exact: true }).getByLabel('Country', { exact: true })
-        this.ifMainAddressStreet1 = page.getByLabel('Main Address', { exact: true }).getByLabel('Street1', { exact: true })
-        this.ifMainAddressPostalCode = page.getByLabel('Main Address', { exact: true }).getByLabel('Postal Code', { exact: true })
-        this.ifMainAddressCity = page.getByLabel('Main Address', { exact: true }).getByLabel('City', { exact: true })
-        this.ifOfficialAddressCountry = page.locator('section[aria-label="Official Address"]').getByLabel('Country', { exact: true })
-        this.ifOfficialAddressStreet1 = page.locator('section[aria-label="Official Address"]').getByLabel('Street1', { exact: true })
-        this.ifOfficialAddressPostalCode = page.locator('section[aria-label="Official Address"]').getByLabel('Postal Code', { exact: true })
-        this.ifOfficialAddressCity = page.locator('section[aria-label="Official Address"]').getByLabel('City', { exact: true })
+        this.ifMainAddressCountry = page.locator('div[data-id="dosp_address1_country1"]').getByLabel('Country', { exact: true })
+        this.ifMainAddressStreet1 = page.locator('input[data-id="address1_line1.fieldControl-text-box-text"]')
+        this.ifMainAddressPostalCode = page.locator('input[data-id="address1_postalcode.fieldControl-text-box-text"]')
+        this.ifMainAddressCity = page.locator('input[data-id="address1_city.fieldControl-text-box-text"]')
+        this.ifOfficialAddressCountry = page.locator('input[data-id="dosp_address2_country.fieldControl-option-set-select"]')
+        this.ifOfficialAddressStreet1 = page.locator('input[data-id="address2_line1.fieldControl-text-box-text"]')
+        this.ifOfficialAddressPostalCode = page.locator('input[data-id="address2_postalcode.fieldControl-text-box-text"]')
+        this.ifOfficialAddressCity = page.locator('input[data-id="address2_city.fieldControl-text-box-text"]')
     }
 
     async createNewAccount() {
@@ -59,8 +59,6 @@ export class Accounts {
         await expect(this.ifOfficialAddressPostalCode).toHaveAttribute('value', enterpriseDetails['postalCode'])
         await expect(this.ifMainAddressCity).toHaveAttribute('value', enterpriseDetails['city'])
         await expect(this.ifOfficialAddressCity).toHaveAttribute('value', enterpriseDetails['city'])
-
-        await this.page.pause()
 
         return enterpriseDetails
     }

@@ -32,7 +32,5 @@ test.describe('DOSP - Smoke Testing', () => {
        else {
         await newAccount.assertEnterpriseDetails()
        }
-       await newAccount.closeWithoutSaving()
-       await page.pause()
     })
 })
