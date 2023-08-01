@@ -6,7 +6,7 @@ import { NewAccount } from '../page-objects/Accounts/NewAccount'
 const secrets = require('../secrets.json')
 
 
-test.describe('Basic Access Test', () => {
+test.describe('DOSP - Smoke Testing', () => {
     let authenticationFlow: AuthenticationFlow
     let sideMenu: SideMenu
     let accounts: Accounts
@@ -26,9 +26,8 @@ test.describe('Basic Access Test', () => {
        await accounts.createNewAccount()
        await newAccount.searchForEnterprise('Belfius')
        var enterpriseData = await newAccount.selectEnterpriseFromFindAccounts()
-       console.log(enterpriseData)
        if (enterpriseData['existing']) {
-        await accounts.assertAccountDetails({"data": "data"})
+        enterpriseData = await accounts.assertAccountDetails(enterpriseData)
        } 
        else {
         await newAccount.assertEnterpriseDetails()

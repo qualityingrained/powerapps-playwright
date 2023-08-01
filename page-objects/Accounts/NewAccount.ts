@@ -29,7 +29,7 @@ export class NewAccount {
     }
 
     async searchForEnterprise(enterpriseName: string) {
-        //await this.ifTradeName.click()
+        await this.ifTradeName.click()
         await this.ifTradeName.fill(enterpriseName)
         //await this.page.keyboard.press('Enter')
         await this.btnfindAccountsRefresh.click()
