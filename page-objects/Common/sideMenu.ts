@@ -10,7 +10,6 @@ export class SideMenu {
     constructor (page: Page) {
         this.page = page
         this.accountsMenuItem = page.getByLabel('Accounts').locator('div').nth(1)
-        //this.contactsMenuItem = page.locator('div[title=Accounts]')
     }
 
     async navigateToAccounts() {
