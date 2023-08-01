@@ -13,7 +13,7 @@ const config: PlaywrightTestConfig = {
         ignoreHTTPSErrors: true,
         video: {
             mode: 'retain-on-failure',
-            size: {width: 1900, height: 1050}
+            size: { width: 1900, height: 1050 }
         },
         screenshot: 'only-on-failure'
     },
