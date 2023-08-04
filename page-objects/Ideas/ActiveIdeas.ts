@@ -18,8 +18,13 @@ export class ActiveIdeas {
     }
 
     async searchForIdea(title: string) {
-        await this.searchField.fill(title)
+        await this.searchField.fill(title, { timeout: 30000 })
         await this.page.keyboard.press('Enter')
+    }
+
+    async openIdea(rowNum: number) {
+        const row = this.page.locator(`div[row-index="${rowNum}"]`)
+        await row.locator('a').first().click()
     }
 
 }

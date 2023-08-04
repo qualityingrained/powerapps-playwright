@@ -5,6 +5,7 @@ import { Accounts } from '../page-objects/Accounts/Accounts'
 import { NewAccount } from '../page-objects/Accounts/NewAccount'
 import { ActiveIdeas } from '../page-objects/Ideas/ActiveIdeas'
 import { NewIdea } from '../page-objects/Ideas/NewIdea'
+import { IdeaDetails } from '../page-objects/Ideas/IdeaDetails'
 const secrets = require('../secrets.json')
 
 test.describe('DOSP - Smoke Testing', () => {
@@ -14,6 +15,7 @@ test.describe('DOSP - Smoke Testing', () => {
 	let newAccount: NewAccount
     let activeIdeas: ActiveIdeas
 	let newIdea: NewIdea
+	let ideaDetails: IdeaDetails
 
 	test.beforeEach(async ({ page }) => {
 		authenticationFlow = new AuthenticationFlow(page)
@@ -22,6 +24,7 @@ test.describe('DOSP - Smoke Testing', () => {
 		newAccount = new NewAccount(page)
         activeIdeas = new ActiveIdeas(page)
 		newIdea = new NewIdea(page)
+		ideaDetails = new IdeaDetails(page)
 		await page.goto(secrets['url'])
 	})
 
@@ -54,6 +57,8 @@ test.describe('DOSP - Smoke Testing', () => {
 
 		// verify creation & add budget
 		await activeIdeas.searchForIdea(testData['teamsChannel'])
+		await activeIdeas.openIdea(0)
+		await ideaDetails.assertIdeaDetails(testData)
 
 		// remove idea
 

@@ -35,17 +35,17 @@ export class NewIdea {
     async createNewIdea() {
         var data = {
             teamsChannel: 'TA_JJA Teams Channel',
-            language: 'French',
+            language: '2',
             type: 'Andere',
             openLevel: 'Internal',
             knowledgeGroup: 'Development 1 (CTG)',
             fundingChannel: '1003',
             detailedFundingChannel: 'HO_Docto'
         }
-        
+
         await this.assertPageTitle()
         await this.ifTeamsName.fill(data['teamsChannel'])
-        await this.ddLanguage.selectOption('2')
+        await this.ddLanguage.selectOption(data['language'])
         await this.ifType.fill(data['type'])
         await this.page.locator('span').getByText(data['type'], { exact: true }).click()
         await this.ifOpenLevel.selectOption({ label: data['openLevel'] })
