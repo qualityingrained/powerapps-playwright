@@ -37,8 +37,8 @@ export class NewIdea {
             teamsChannel: 'TA_JJA Teams Channel',
             language: '2',
             type: 'Andere',
-            openLevel: 'Internal',
-            knowledgeGroup: 'Development 1 (CTG)',
+            openLevel: '530360002',
+            knowledgeGroup: 'kennisgroep A (Development 1 - CTG)',
             fundingChannel: '1003',
             detailedFundingChannel: 'HO_Docto'
         }
@@ -48,7 +48,7 @@ export class NewIdea {
         await this.ddLanguage.selectOption(data['language'])
         await this.ifType.fill(data['type'])
         await this.page.locator('span').getByText(data['type'], { exact: true }).click()
-        await this.ifOpenLevel.selectOption({ label: data['openLevel'] })
+        await this.ifOpenLevel.selectOption(data['openLevel'])
         await this.ifLeadKnowledgeGroup.fill('kennisgroep A')
         await this.page.locator('span').getByText(data['knowledgeGroup'], { exact: true }).click()
         await this.ifFundingChannel.fill(data['fundingChannel'])

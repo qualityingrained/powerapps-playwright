@@ -2,7 +2,6 @@ import { Page, Locator, expect } from '@playwright/test'
 
 export class IdeaDetails {
     readonly page: Page
-    readonly pageVerificator: Locator
     readonly btnGeneral: Locator
     readonly btnFinances: Locator
 
@@ -18,7 +17,7 @@ export class IdeaDetails {
     readonly ifDetailedFundingChannel: Locator
 
     // elements on Finances tab
-    readonly btnNwFunding: Locator
+    readonly btnNewFunding: Locator
     readonly popUpVerificator: Locator
     readonly newFunding_ifBusinessUnit: Locator
     readonly newFunding_ifKnowledgeGroup: Locator
@@ -28,23 +27,21 @@ export class IdeaDetails {
 
     constructor (page: Page) {
         this.page = page
-        this.pageVerificator = page.locator('span[data-id="entity_name_span"]')
         this.btnGeneral = page.getByText('General', { exact: true })
         this.btnFinances = page.getByText('Finances', { exact: true })
         this.ifTeamsName = page.getByLabel('Teams Name', { exact: true })
         this.ifLanguage = page.getByLabel('Language', { exact: true })
         this.ifDevelopment = page.getByLabel('Development', { exact: true })
-        this.ifBusinessUnit = page.getByLabel('Business Unit', { exact: true })
-        this.ifType = page.getByLabel('Type', { exact: true })
-        this.ifLeadKnowledgeGroup = page.getByLabel('Lead Knowledge Group', { exact: true })
+        this.ifBusinessUnit = page.getByRole('list', { name: 'Business Unit' })
+        this.ifType = page.getByRole('list', { name: 'Type' })
+        this.ifLeadKnowledgeGroup = page.getByRole('list', { name: 'Lead Knowledge Group'})
         this.ifOpenLevel = page.getByLabel('Open Level', { exact: true })
-        this.ifFundingChannel = page.getByLabel('Funding Channel', { exact: true })
-        this.ifDetailedFundingChannel = page.getByLabel('Main Detailedfundingchannel', { exact: true })
-        this.ifOpenLevel = page.getByLabel('Open Level', { exact: true })
+        this.ifFundingChannel = page.getByRole('list', { name: 'Funding Channel' })
+        this.ifDetailedFundingChannel = page.getByRole('list', { name: 'Main Detailedfundingchannel' })
         this.newFunding_ifBusinessUnit = page.getByLabel('Knowledge Group', { exact: true })
-        this.newFunding_ifFundingChannel = page.getByLabel('Funding Channel', { exact: true })
+        this.newFunding_ifFundingChannel = page.getByRole('list', { name: 'Funding Channel' })
         this.newFunding_btnSaveAndClose = page.getByLabel('Save & Close', { exact: true })
-        this.ifOpenLevel = page.getByLabel('Budget Amount', { exact: true })
+        this.newFunding_ifBudgetAmount = page.getByLabel('Budget Amount', { exact: true })
         this.popUpVerificator = page.locator('h2[data-id="header_title"]')
     }
 
@@ -52,7 +49,7 @@ export class IdeaDetails {
     //     teamsChannel: 'TA_JJA Teams Channel',
     //     language: 'French',
     //     type: 'Andere',
-    //     openLevel: 'Internal',
+    //     openLevel: '530360002',
     //     knowledgeGroup: 'Development 1 (CTG)',
     //     fundingChannel: '1003',
     //     detailedFundingChannel: 'HO_Docto'
@@ -60,17 +57,30 @@ export class IdeaDetails {
 
 
     async assertIdeaDetails(data: {}) {
-        expect(await this.pageVerificator.innerText()).toContain('Idea')
+        await expect(this.page.getByRole('heading', { name: 'TA_JJA Teams ChannelSave status - Saved' })).toBeVisible({ timeout: 15000 })
         await expect(this.ifTeamsName).toHaveAttribute('value', data['teamsChannel'])
-        expect(await this.ifLanguage.inputValue()).toBe(data['language'])
+        await expect(this.ifLanguage).toHaveValue(data['language'])
+        await expect(this.ifBusinessUnit.getByLabel('Development', { exact: true })).toBeVisible({ timeout: 15000 })
+        await expect(this.ifType.getByLabel(data['type'])).toBeVisible({ timeout: 15000 })
+        await expect(this.ifLeadKnowledgeGroup.getByLabel(data['knowledgeGroup'])).toBeVisible({ timeout: 15000 })
+        await expect(this.ifOpenLevel).toHaveValue(data['openLevel'])
+        await expect(this.ifFundingChannel.getByLabel(data['fundingChannel'])).toBeVisible({ timeout: 15000 })
+        await expect(this.ifDetailedFundingChannel.getByLabel(data['detailedFundingChannel'])).toBeVisible({ timeout: 15000 })
+    }
 
-        //hieronder zitten de foutjes
-        await expect(this.ifBusinessUnit.getByText('Development')).toHaveCount(1)
-        await expect(this.ifType.getByText(data['knowledgeGroup'])).toHaveCount(1)
-        await expect(this.ifLeadKnowledgeGroup.getByText(data['knowledgeGroup'])).toHaveCount(1)
-        await expect(this.ifOpenLevel).toHaveAttribute('title', data['openLevel'])
-        await expect(this.ifFundingChannel.getByText(data['fundingChannel'])).toHaveCount(1)
-        await expect(this.ifDetailedFundingChannel.getByText(data['detailedFundingChannel'])).toHaveCount(1)
+    async navigateToFinances() {
+        await this.btnFinances.click()
+        await expect(this.btnNewFunding).toBeVisible()
+    }
+
+    async addBudgetToExistingLine(nth: number) {
+        nth = nth - 1
+        const listOfBudgetLines = await this.page.locator('div[class="panel funding  clickable"]').all()
+        if (listOfBudgetLines.length >= nth) {
+            await listOfBudgetLines[nth].click()
+        }
+        await listOfBudgetLines[0].click()
+
     }
 
 }
