@@ -31,10 +31,11 @@ export class NewAccount {
     async searchForEnterprise(enterpriseName: string) {
         await this.ifTradeName.click()
         await this.ifTradeName.fill(enterpriseName)
-        //await this.page.keyboard.press('Enter')
-        await this.page.route('*/**/api/enduser/search/adress', async route => {
-            await route.fulfill({ path: './page-objects/Accounts/apiResp-Belfius.json' })
-        })
+        if (enterpriseName == 'Belfius') {
+            await this.page.route('*/**/api/enduser/search/adress', async route => {
+                await route.fulfill({ path: './page-objects/Accounts/apiResp-Belfius.json' })
+            })
+        }
         await this.btnfindAccountsRefresh.click()
     }
 
