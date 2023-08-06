@@ -39,7 +39,6 @@ test.describe('DOSP - Smoke Testing', () => {
 		var enterpriseData = await newAccount.selectEnterpriseFromFindAccounts()
 		if (enterpriseData['existing']) {
 			enterpriseData = await accounts.assertAccountDetails(enterpriseData)
-			await page.pause()
 		} else {
 			await newAccount.assertEnterpriseDetails()
 		}
