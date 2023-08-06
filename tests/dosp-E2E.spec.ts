@@ -28,7 +28,7 @@ test.describe('DOSP - Smoke Testing', () => {
 		await page.goto(secrets['url'])
 	})
 
-	test.only('Create Account', async ({ page }) => {
+	test('Create Account', async ({ page }) => {
 		// navigation
 		await authenticationFlow.login()
 		await sideMenu.navigateToAccounts()
@@ -44,7 +44,7 @@ test.describe('DOSP - Smoke Testing', () => {
 		}
 	})
 
-    test('Create Idea', async ({ page }) => {
+    test.only('Create Idea', async ({ page }) => {
         // navigation
 		await authenticationFlow.login()
         await sideMenu.navigateToIdeas()
