@@ -50,18 +50,18 @@ test.describe('DOSP - Smoke Testing', () => {
         await sideMenu.navigateToIdeas()
 		
 		// create new idea
-        // await activeIdeas.createNewIdea()
-		// await newIdea.assertPageTitle()
-		// var testData = await newIdea.createNewIdea()
-		var testData = {
-            teamsChannel: 'TA_JJA Teams Channel',
-            language: '2',
-            type: 'Andere',
-            openLevel: '530360002',
-            knowledgeGroup: 'kennisgroep A (Development 1 - CTG)',
-            fundingChannel: '1003',
-            detailedFundingChannel: 'HO_Docto'
-        }
+        await activeIdeas.createNewIdea()
+		await newIdea.assertPageTitle()
+		var testData = await newIdea.createNewIdea()
+		// var testData = {
+        //     teamsChannel: 'TA_JJA Teams Channel',
+        //     language: '2',
+        //     type: 'Andere',
+        //     openLevel: '530360002',
+        //     knowledgeGroup: 'kennisgroep A (Development 1 - CTG)',
+        //     fundingChannel: '1003',
+        //     detailedFundingChannel: 'HO_Docto'
+        // }
 
 		// verify creation & add budget
 		await activeIdeas.searchForIdea(testData['teamsChannel'])

@@ -1,5 +1,4 @@
 import { Page, Locator, expect } from '@playwright/test'
-import { type } from 'os'
 
 export class NewIdea {
     readonly page: Page
