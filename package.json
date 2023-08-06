@@ -15,8 +15,9 @@
   "author": "Joren Janssens",
   "license": "ISC",
   "dependencies": {
-    "@playwright/test": "^1.36.2",
-    "playwright": "^1.36.2",
     "prettier": "^3.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.36.2"
   }
 }

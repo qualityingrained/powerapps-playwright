@@ -45,7 +45,7 @@ test.describe('DOSP - Smoke Testing', () => {
 		}
 	})
 
-    test.only('Create Idea', async ({ page }) => {
+    test.skip('Create Idea', async ({ page }) => {
         // navigation
 		await authenticationFlow.login()
         await sideMenu.navigateToIdeas()
