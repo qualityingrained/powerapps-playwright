@@ -28,7 +28,7 @@ test.describe('DOSP - Smoke Testing', () => {
 		await page.goto(secrets['url'])
 	})
 
-	test.only('Create Account', async ({ page }) => {
+	test('Create Account', async ({ page }) => {
 		// navigation
 		await authenticationFlow.login()
 		await sideMenu.navigateToAccounts()
@@ -45,7 +45,9 @@ test.describe('DOSP - Smoke Testing', () => {
 	})
 
     test('Create Idea', async ({ page }) => {
-        // navigation
+        test.slow()
+
+		// navigation
 		await authenticationFlow.login()
         await sideMenu.navigateToIdeas()
 		
@@ -68,10 +70,10 @@ test.describe('DOSP - Smoke Testing', () => {
 		await activeIdeas.openIdea(0)
 		await ideaDetails.assertIdeaDetails(testData)
 		await ideaDetails.navigateToFinances()
-		await ideaDetails.addBudgetToExistingLine(1)
+		await ideaDetails.addBudgetToExistingLine(testData['knowledgeGroup'], '6666')
+		//await ideaDetails.createNewBudgetLine('1001', '9999')
 
 		// remove idea
-
         await page.pause()
     })
 })

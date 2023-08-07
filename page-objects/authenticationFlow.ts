@@ -21,7 +21,7 @@ export class AuthenticationFlow {
     async login() {
         await this.ifUsername.type(credentials['username'])
         await this.btnUsernameNext.click()
-        await this.ifPassword.type(credentials['password'])
+        await this.ifPassword.fill(credentials['password'])
         await this.btnSignIn.click()
         await this.btnNoStoreLogin.click()
         await expect(this.page.getByText('SANDBOX')).toBeVisible({timeout: 60000})
