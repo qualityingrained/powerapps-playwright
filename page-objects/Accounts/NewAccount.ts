@@ -125,8 +125,8 @@ export class NewAccount {
 
     async assertEnterpriseDetails() {
         await this.ifTradeName.screenshot({path: 'scr/officialName.png'})
-        expect(await this.ifTradeName.innerText()).toBe(this.enterpriseName)
-        expect(await this.ifOfficialName.innerText()).toBe(this.enterpriseName)
+        expect.soft(await this.ifTradeName.innerText()).toBe(this.enterpriseName)
+        expect.soft(await this.ifOfficialName.innerText()).toBe(this.enterpriseName)
         if(this.enterpriseVAT !== '') {
             expect(await this.ifVATNumber.innerText()).toBe(this.enterpriseVAT)
         }
@@ -135,14 +135,14 @@ export class NewAccount {
         await this.page.getByRole('tab', { name: 'Addresses' }).click()
         
         // verify the main and official address
-        expect(await this.page.getByLabel('Main Address').getByLabel('Country').innerText()).toBe(this.enterpriseCountry)
-        expect(await this.page.getByLabel('Main Address').getByLabel('Street 1').innerText()).toBe(this.enterpriseAddress)
-        expect(await this.page.getByLabel('Main Address').getByLabel('Postal Code').innerText()).toBe(this.enterprisePostalcode)
-        expect(await this.page.getByLabel('Main Address').getByLabel('City').innerText()).toBe(this.enterpriseCity)
+        expect.soft(await this.page.getByLabel('Main Address').getByLabel('Country').innerText()).toBe(this.enterpriseCountry)
+        expect.soft(await this.page.getByLabel('Main Address').getByLabel('Street 1').innerText()).toBe(this.enterpriseAddress)
+        expect.soft(await this.page.getByLabel('Main Address').getByLabel('Postal Code').innerText()).toBe(this.enterprisePostalcode)
+        expect.soft(await this.page.getByLabel('Main Address').getByLabel('City').innerText()).toBe(this.enterpriseCity)
         
-        expect(await this.page.getByLabel('Official Address').getByLabel('Country').innerText()).toBe(this.enterpriseCountry)
-        expect(await this.page.getByLabel('Official Address').getByLabel('Street 1').innerText()).toBe(this.enterpriseAddress)
-        expect(await this.page.getByLabel('Official Address').getByLabel('Postal Code').innerText()).toBe(this.enterprisePostalcode)
-        expect(await this.page.getByLabel('Official Address').getByLabel('City').innerText()).toBe(this.enterpriseCity)
+        expect.soft(await this.page.getByLabel('Official Address').getByLabel('Country').innerText()).toBe(this.enterpriseCountry)
+        expect.soft(await this.page.getByLabel('Official Address').getByLabel('Street 1').innerText()).toBe(this.enterpriseAddress)
+        expect.soft(await this.page.getByLabel('Official Address').getByLabel('Postal Code').innerText()).toBe(this.enterprisePostalcode)
+        expect.soft(await this.page.getByLabel('Official Address').getByLabel('City').innerText()).toBe(this.enterpriseCity)
     }
 }

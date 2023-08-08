@@ -8,7 +8,7 @@ import { NewIdea } from '../page-objects/Ideas/NewIdea'
 import { IdeaDetails } from '../page-objects/Ideas/IdeaDetails'
 const secrets = require('../secrets.json')
 
-test.describe('DOSP - Smoke Testing', () => {
+test.describe.parallel('DOSP - Smoke Testing', () => {
 	let authenticationFlow: AuthenticationFlow
 	let sideMenu: SideMenu
 	let accounts: Accounts
@@ -44,7 +44,7 @@ test.describe('DOSP - Smoke Testing', () => {
 		}
 	})
 
-    test('Create Idea', async ({ page }) => {
+    test.only('Create Idea', async ({ page }) => {
         test.slow()
 
 		// navigation
@@ -55,25 +55,16 @@ test.describe('DOSP - Smoke Testing', () => {
         await activeIdeas.createNewIdea()
 		await newIdea.assertPageTitle()
 		var testData = await newIdea.createNewIdea()
-		// var testData = {
-        //     teamsChannel: 'TA_JJA Teams Channel',
-        //     language: '2',
-        //     type: 'Andere',
-        //     openLevel: '530360002',
-        //     knowledgeGroup: 'kennisgroep A (Development 1 - CTG)',
-        //     fundingChannel: '1003',
-        //     detailedFundingChannel: 'HO_Docto'
-        // }
-
+	
 		// verify creation & add budget
 		await activeIdeas.searchForIdea(testData['teamsChannel'])
 		await activeIdeas.openIdea(0)
 		await ideaDetails.assertIdeaDetails(testData)
 		await ideaDetails.navigateToFinances()
 		await ideaDetails.addBudgetToExistingLine(testData['knowledgeGroup'], '6666')
-		//await ideaDetails.createNewBudgetLine('1001', '9999')
+		await ideaDetails.createNewBudgetLine('1001', '9999')
 
 		// remove idea
-        await page.pause()
+        await ideaDetails.removeIdea()
     })
 })

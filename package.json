@@ -4,7 +4,8 @@
   "description": "Test Automation - Playwright trial on PowerApps",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test --config=playwright.config.ts --headed"
+    "test": "playwright test --config=playwright.config.ts --headed",
+    "report": "playwright show-report"
   },
   "keywords": [
     "test",

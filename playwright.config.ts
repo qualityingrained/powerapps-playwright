@@ -3,6 +3,7 @@ const config: PlaywrightTestConfig = {
 	timeout: 120000,
 	retries: 0,
 	testDir: 'tests/',
+	reporter: [['list'], ['html', { open: 'never' }]],
 	use: {
 		headless: true,
 		viewport: {

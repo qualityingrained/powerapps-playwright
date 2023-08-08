@@ -73,39 +73,43 @@ export class IdeaDetails {
 	}
 
 	async assertIdeaDetails(data: {}) {
-		await expect(
-			this.page.getByRole('heading', {
-				name: `${data['teamsChannel']}Save status - Saved`,
-			})
-		).toBeVisible({ timeout: 20000 })
-		await expect(this.ifTeamsName).toHaveAttribute(
-			'value',
-			data['teamsChannel'],
-			{ timeout: 15000 }
-		)
-		await expect(this.ifLanguage).toHaveValue(data['language'], {
+		await expect
+			.soft(
+				this.page.getByRole('heading', {
+					name: `${data['teamsChannel']}Save status - Saved`,
+				})
+			)
+			.toBeVisible({ timeout: 20000 })
+		await expect
+			.soft(this.ifTeamsName)
+			.toHaveAttribute('value', data['teamsChannel'], { timeout: 15000 })
+		await expect.soft(this.ifLanguage).toHaveValue(data['language'], {
 			timeout: 15000,
 		})
-		await expect(
-			this.ifBusinessUnit.getByLabel('Development', { exact: true })
-		).toBeVisible({ timeout: 15000 })
+		await expect
+			.soft(this.ifBusinessUnit.getByLabel('Development', { exact: true }))
+			.toBeVisible({ timeout: 15000 })
 		await expect(this.ifType.getByLabel(data['type'])).toBeVisible({
 			timeout: 15000,
 		})
-		await expect(
-			this.ifLeadKnowledgeGroup.getByLabel(data['knowledgeGroup'])
-		).toBeVisible({ timeout: 15000 })
-		await expect(
-			this.page
-				.getByLabel(`${data['teamsChannel']}- Saved`)
-				.getByLabel('Open Level', { exact: true })
-		).toHaveValue(data['openLevel'])
-		await expect(
-			this.ifFundingChannel.getByLabel(data['fundingChannel'])
-		).toBeVisible({ timeout: 15000 })
-		await expect(
-			this.ifDetailedFundingChannel.getByLabel(data['detailedFundingChannel'])
-		).toBeVisible({ timeout: 15000 })
+		await expect
+			.soft(this.ifLeadKnowledgeGroup.getByLabel(data['knowledgeGroup']))
+			.toBeVisible({ timeout: 15000 })
+		await expect
+			.soft(
+				this.page
+					.getByLabel(`${data['teamsChannel']}- Saved`)
+					.getByLabel('Open Level', { exact: true })
+			)
+			.toHaveValue(data['openLevel'])
+		await expect
+			.soft(this.ifFundingChannel.getByLabel(data['fundingChannel']))
+			.toBeVisible({ timeout: 15000 })
+		await expect
+			.soft(
+				this.ifDetailedFundingChannel.getByLabel(data['detailedFundingChannel'])
+			)
+			.toBeVisible({ timeout: 15000 })
 	}
 
 	async navigateToFinances() {
@@ -122,15 +126,15 @@ export class IdeaDetails {
 			this.page.locator('span[data-id="entity_name_span"]')
 		).toBeVisible({ timeout: 15000 })
 		await this.page.getByLabel('Budget Amount. Last saved value:').click()
-        await this.page.getByLabel('Budget Amount. Last saved value:').fill(amount)
+		await this.page.getByLabel('Budget Amount. Last saved value:').fill(amount)
 		await this.page.getByRole('menuitem', { name: 'Save & Close' }).click()
 	}
 
 	async createNewBudgetLine(channelCode: string, amount: string) {
 		await expect(this.btnNewFunding).toBeVisible({ timeout: 15000 })
 		await this.btnNewFunding.click()
+		await this.btnNewFunding.click()
 		await this.newFunding_ifKnowledgeGroup.fill('kennisgroep B')
-		await this.page.pause()
 		await this.page
 			.getByLabel('Kennisgroep B (Development 1 - CTG), Development 1 (CTG)')
 			.click()
@@ -139,5 +143,15 @@ export class IdeaDetails {
 		await this.newFunding_ifBudgetAmount.click()
 		await this.newFunding_ifBudgetAmount.fill(amount)
 		await this.newFunding_btnSaveAndClose.click()
+	}
+
+	async removeIdea() {
+		await this.page
+			.getByRole('menuitem', {
+				name: 'Remove',
+			})
+			.click()
+		await this.page.locator('button[data-id="confirmButton"]').click()
+		await this.page.getByRole('menuitem', { name: 'Save & Close' }).click()
 	}
 }
