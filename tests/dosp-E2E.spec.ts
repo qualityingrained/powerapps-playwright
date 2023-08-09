@@ -9,62 +9,65 @@ import { IdeaDetails } from '../page-objects/Ideas/IdeaDetails'
 const secrets = require('../secrets.json')
 
 test.describe.parallel('DOSP - Smoke Testing', () => {
-	let authenticationFlow: AuthenticationFlow
-	let sideMenu: SideMenu
-	let accounts: Accounts
-	let newAccount: NewAccount
-    let activeIdeas: ActiveIdeas
-	let newIdea: NewIdea
-	let ideaDetails: IdeaDetails
+  let authenticationFlow: AuthenticationFlow
+  let sideMenu: SideMenu
+  let accounts: Accounts
+  let newAccount: NewAccount
+  let activeIdeas: ActiveIdeas
+  let newIdea: NewIdea
+  let ideaDetails: IdeaDetails
 
-	test.beforeEach(async ({ page }) => {
-		authenticationFlow = new AuthenticationFlow(page)
-		sideMenu = new SideMenu(page)
-		accounts = new Accounts(page)
-		newAccount = new NewAccount(page)
-        activeIdeas = new ActiveIdeas(page)
-		newIdea = new NewIdea(page)
-		ideaDetails = new IdeaDetails(page)
-		await page.goto(secrets['url'])
-	})
+  test.beforeEach(async ({ page }) => {
+    authenticationFlow = new AuthenticationFlow(page)
+    sideMenu = new SideMenu(page)
+    accounts = new Accounts(page)
+    newAccount = new NewAccount(page)
+    activeIdeas = new ActiveIdeas(page)
+    newIdea = new NewIdea(page)
+    ideaDetails = new IdeaDetails(page)
+    await page.goto(secrets['url'])
+  })
 
-	test('Create Account', async ({ page }) => {
-		// navigation
-		await authenticationFlow.login()
-		await sideMenu.navigateToAccounts()
-		
-		// create new Account
-		await accounts.createNewAccount()
-		await newAccount.searchForEnterprise('Belfius')
-		var enterpriseData = await newAccount.selectEnterpriseFromFindAccounts()
-		if (enterpriseData['existing']) {
-			enterpriseData = await accounts.assertAccountDetails(enterpriseData)
-		} else {
-			await newAccount.assertEnterpriseDetails()
-		}
-	})
+  test('Create Account', async ({ page }) => {
+    // navigation
+    await authenticationFlow.login()
+    await sideMenu.navigateToAccounts()
 
-    test.only('Create Idea', async ({ page }) => {
-        test.slow()
+    // create new Account
+    await accounts.createNewAccount()
+    await newAccount.searchForEnterprise('Belfius')
+    var enterpriseData = await newAccount.selectEnterpriseFromFindAccounts()
+    if (enterpriseData['existing']) {
+      enterpriseData = await accounts.assertAccountDetails(enterpriseData)
+    } else {
+      await newAccount.assertEnterpriseDetails()
+    }
+  })
 
-		// navigation
-		await authenticationFlow.login()
-        await sideMenu.navigateToIdeas()
-		
-		// create new idea
-        await activeIdeas.createNewIdea()
-		await newIdea.assertPageTitle()
-		var testData = await newIdea.createNewIdea()
-	
-		// verify creation & add budget
-		await activeIdeas.searchForIdea(testData['teamsChannel'])
-		await activeIdeas.openIdea(0)
-		await ideaDetails.assertIdeaDetails(testData)
-		await ideaDetails.navigateToFinances()
-		await ideaDetails.addBudgetToExistingLine(testData['knowledgeGroup'], '6666')
-		await ideaDetails.createNewBudgetLine('1001', '9999')
+  test.only('Create Idea', async ({ page }) => {
+    test.slow()
 
-		// remove idea
-        await ideaDetails.removeIdea()
-    })
+    // navigation
+    await authenticationFlow.login()
+    await sideMenu.navigateToIdeas()
+
+    // create new idea
+    await activeIdeas.createNewIdea()
+    await newIdea.assertPageTitle()
+    var testData = await newIdea.createNewIdea()
+
+    // verify creation & add budget
+    await activeIdeas.searchForIdea(testData['teamsChannel'])
+    await activeIdeas.openIdea(0)
+    await ideaDetails.assertIdeaDetails(testData)
+    await ideaDetails.navigateToFinances()
+    await ideaDetails.addBudgetToExistingLine(
+      testData['knowledgeGroup'],
+      '6666',
+    )
+    await ideaDetails.createNewBudgetLine('1001', '9999')
+
+    // remove idea
+    await ideaDetails.removeIdea()
+  })
 })
