@@ -70,6 +70,7 @@ export class IdeaDetails {
     this.newFunding_btnSaveAndClose = page.getByRole('menuitem', {
       name: 'Save & Close',
     })
+
   }
 
   async assertIdeaDetails(data: {}) {

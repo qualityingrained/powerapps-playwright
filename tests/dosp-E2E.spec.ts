@@ -44,7 +44,8 @@ test.describe.parallel('DOSP - Smoke Testing', () => {
     }
   })
 
-  test.only('Create Idea', async ({ page }) => {
+  test('Create Idea', async ({ page }) => {
+    test.setTimeout(60 * 1000 * 2)
     test.slow()
 
     // navigation

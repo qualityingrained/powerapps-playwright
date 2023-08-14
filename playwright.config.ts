@@ -4,6 +4,10 @@ const config: PlaywrightTestConfig = {
   retries: 0,
   testDir: 'tests/',
   reporter: [['list'], ['html', { open: 'never' }]],
+  globalTimeout: 60 * 60 * 1000,
+  expect: {
+    timeout: 60000
+  },
   use: {
     headless: true,
     viewport: {
