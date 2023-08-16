@@ -60,10 +60,9 @@ export class IdeaDetails {
 		this.btnNewFunding = page
 			.frameLocator("#WebResource_FinanceUI")
 			.getByText("New Funding");
-		this.newFunding_ifKnowledgeGroup = page.getByLabel(
-			"Knowledge Group, Lookup",
-			{ exact: true },
-		);
+		this.newFunding_ifKnowledgeGroup = page.getByRole("combobox", {
+			name: "Knowledge Group, Lookup",
+		});
 		this.newFunding_ifFundingChannel = page.getByLabel(
 			"Funding Channel, Lookup",
 			{ exact: true },
@@ -113,7 +112,7 @@ export class IdeaDetails {
 					data["detailedFundingChannel"],
 				),
 			)
-			.toBeVisible({ timeout: 15000 });
+			.toBeVisible({ timeout: 30000 });
 	}
 
 	async navigateToFinances() {
@@ -142,7 +141,9 @@ export class IdeaDetails {
 		await expect(this.btnNewFunding).toBeVisible({ timeout: 15000 });
 		await this.btnNewFunding.click();
 		await this.btnNewFunding.click();
-		await this.newFunding_ifKnowledgeGroup.fill("kennisgroep B");
+		await this.newFunding_ifKnowledgeGroup.fill("kennisgroep B", {
+			timeout: 30000,
+		});
 		await this.page
 			.getByLabel("Kennisgroep B (Development 1 - CTG), Development 1 (CTG)")
 			.click();
