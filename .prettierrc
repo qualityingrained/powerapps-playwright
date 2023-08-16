@@ -1,12 +1,26 @@
 {
-    "printWidth": 100,
-    "tabWidth": 2,
-    "useTabs": false,
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "all",
-    "bracketSpacing": true,
-    "arrowParens": "always",
-    "parser": "typescript"
-  }
-  
+	"printWidth": 80,
+	"tabWidth": 3,
+	"useTabs": true,
+	"semi": true,
+	"singleQuote": true,
+	"trailingComma": "all",
+	"bracketSpacing": true,
+	"arrowParens": "always",
+	"overrides": [
+		{
+			"files": "*.json",
+			"options": {
+				"singleQuote": false,
+				"parser": "json"
+			}
+		},
+		{
+			"files": "*.ts",
+			"options": {
+				"singleQuote": false,
+				"parser": "typescript"
+			}
+		}
+	]
+}
