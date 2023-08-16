@@ -43,5 +43,5 @@ jobs:
               from: Joren Janssens
               body: Results of the test run can be found in the attachments.
               reply_to: joren.janssens@ctg.com
-              attachments: playwright-report/*
+              attachments: playwright-report/*.html,playwright-report/data/*.png
               priority: low

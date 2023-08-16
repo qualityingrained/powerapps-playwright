@@ -36,7 +36,7 @@ test.describe.parallel("DOSP - Smoke Testing", () => {
 		await page.goto(secrets["url"]);
 	});
 
-	test("Create Account", async ({ page }) => {
+	test.only("Create Account", async ({ page }) => {
 		// navigation
 		await authenticationFlow.login();
 		await sideMenu.navigateToAccounts();
