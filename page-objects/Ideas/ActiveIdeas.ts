@@ -18,7 +18,7 @@ export class ActiveIdeas {
 	}
 
 	async searchForIdea(title: string) {
-		await this.searchField.fill(title, { timeout: 30000 });
+		await this.searchField.fill(title, { timeout: 60000 });
 		await this.page.keyboard.press("Enter");
 	}
 

@@ -27,3 +27,21 @@ jobs:
               name: playwright-report
               path: playwright-report/
               retention-days: 90
+         - name: Send mail
+           uses: dawidd6/action-send-mail@v3
+           with:
+              connection_url: ${{secrets.MAIL_CONNECTION}}
+              # Required mail subject:
+              subject: DOSP - Playwright Automation Results
+              # Required recipients' addresses:
+              to: joren.janssens@ctg.com,jorenjanssens@me.com
+              # Required sender full name (address can be skipped):
+              from: Joren Janssens # <qualityingrained@gmail.com>
+              # Optional plain body:
+              body: Results of the test run can be found in the attachments.
+              # Optional recipient of the email response:
+              reply_to: joren.janssens@ctg.com
+              # Optional attachments:
+              attachments: playwright-report/*
+              # Optional priority: 'high', 'normal' (default) or 'low'
+              priority: low
