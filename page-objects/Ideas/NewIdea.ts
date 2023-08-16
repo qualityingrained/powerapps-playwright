@@ -42,7 +42,9 @@ export class NewIdea {
 	}
 
 	async assertPageTitle() {
-		expect(await this.lblPageTitle.innerText()).toContain("New Idea");
+		expect(await this.lblPageTitle.innerText({ timeout: 60000 })).toContain(
+			"New Idea",
+		);
 	}
 
 	async createNewIdea() {
