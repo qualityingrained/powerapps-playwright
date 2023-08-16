@@ -1,5 +1,14 @@
 import { Page, Locator, expect } from "@playwright/test";
-const credentials = require("../secrets.json");
+
+var credentials = {};
+if (process.env.URL) {
+	credentials = {
+		username: process.env.USERNAME,
+		password: process.env.PASSWORD,
+	};
+} else {
+	credentials = require("../secrets.json");
+}
 
 export class AuthenticationFlow {
 	readonly page: Page;

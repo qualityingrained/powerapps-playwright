@@ -1,22 +1,18 @@
 {
-  "name": "powerapps-playwright",
-  "version": "1.0.0",
-  "description": "Test Automation - Playwright trial on PowerApps",
-  "main": "index.js",
-  "scripts": {
-    "test": "playwright test --config=playwright.config.ts --headed",
-    "report": "playwright show-report"
-  },
-  "keywords": [
-    "test",
-    "automation",
-    "playwright",
-    "powerapps"
-  ],
-  "author": "Joren Janssens",
-  "license": "ISC",
-  "dependencies": {
-    "@playwright/test": "^1.36.2",
-    "prettier": "^3.0.0"
-  }
+	"name": "powerapps-playwright",
+	"version": "1.0.0",
+	"description": "Test Automation - Playwright trial on PowerApps",
+	"main": "index.js",
+	"scripts": {
+		"test": "playwright test --config=playwright.config.ts --headed",
+		"test:ci": "playwright test --config=playwright.config.ts",
+		"report": "playwright show-report"
+	},
+	"keywords": ["test", "automation", "playwright", "powerapps"],
+	"author": "Joren Janssens",
+	"license": "ISC",
+	"dependencies": {
+		"@playwright/test": "^1.36.2",
+		"prettier": "^3.0.0"
+	}
 }

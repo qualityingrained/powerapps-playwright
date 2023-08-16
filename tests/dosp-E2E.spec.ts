@@ -6,7 +6,16 @@ import { NewAccount } from "../page-objects/Accounts/NewAccount";
 import { ActiveIdeas } from "../page-objects/Ideas/ActiveIdeas";
 import { NewIdea } from "../page-objects/Ideas/NewIdea";
 import { IdeaDetails } from "../page-objects/Ideas/IdeaDetails";
-const secrets = require("../secrets.json");
+
+var secrets = {};
+console.log("URL env var: " + process.env.URL);
+if (process.env.URL) {
+	secrets = {
+		url: process.env.URL,
+	};
+} else {
+	secrets = require("../secrets.json");
+}
 
 test.describe.parallel("DOSP - Smoke Testing", () => {
 	let authenticationFlow: AuthenticationFlow;
