@@ -31,18 +31,17 @@ jobs:
            if: always()
            uses: dawidd6/action-send-mail@v3
            with:
-              connection_url: ${{secrets.MAIL_CONNECTION}}
-              # Required mail subject:
+              # Server Connection
+              server_address: smtp.gmail.com
+              server_port: 465
+              secure: true
+              username: ${{secrets.MAIL_USERNAME}}
+              password: ${{secrets.MAIL_PASSWORD}}
+              # Mail contents
               subject: DOSP - Playwright Automation Results
-              # Required recipients' addresses:
               to: joren.janssens@ctg.com,jorenjanssens@me.com
-              # Required sender full name (address can be skipped):
-              from: Joren Janssens # <qualityingrained@gmail.com>
-              # Optional plain body:
+              from: Joren Janssens
               body: Results of the test run can be found in the attachments.
-              # Optional recipient of the email response:
               reply_to: joren.janssens@ctg.com
-              # Optional attachments:
               attachments: playwright-report/*
-              # Optional priority: 'high', 'normal' (default) or 'low'
               priority: low
