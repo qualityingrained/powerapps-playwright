@@ -35,12 +35,12 @@ jobs:
               server_address: smtp.gmail.com
               server_port: 465
               secure: true
-              username: ${{secrets.MAIL_USERNAME}}
-              password: ${{secrets.MAIL_PASSWORD}}
+              username: ${{ secrets.MAIL_USERNAME }}
+              password: ${{ secrets.MAIL_PASSWORD }}
               # Mail contents
               subject: DOSP - Playwright Automation Results
-              to: joren.janssens@ctg.com,jorenjanssens@me.com
-              from: Joren Janssens
+              to: ${{ secrets.MAIL_RECIPIENTS }}
+              from: ${{ secrets.MAIL_USERNAME }}
               body: Test Run Report can be found in the attachments.
                  In case of failures - more details can be found in the artefacts on GitHub (https://github.com/qualityingrained/powerapps-playwright/actions/)
               reply_to: joren.janssens@ctg.com
