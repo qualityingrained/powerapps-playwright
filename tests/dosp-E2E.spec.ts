@@ -8,7 +8,6 @@ import { NewIdea } from "../page-objects/Ideas/NewIdea";
 import { IdeaDetails } from "../page-objects/Ideas/IdeaDetails";
 
 var secrets = {};
-console.log("URL env var: " + process.env.URL);
 if (process.env.URL) {
 	secrets = {
 		url: process.env.URL,

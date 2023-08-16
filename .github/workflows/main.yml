@@ -28,6 +28,7 @@ jobs:
               path: playwright-report/
               retention-days: 90
          - name: Send mail
+           if: always()
            uses: dawidd6/action-send-mail@v3
            with:
               connection_url: ${{secrets.MAIL_CONNECTION}}
