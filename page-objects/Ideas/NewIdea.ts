@@ -47,15 +47,15 @@ export class NewIdea {
 		);
 	}
 
-	async createNewIdea() {
+	async createNewIdea(teamsName: string) {
 		var data = {
-			teamsChannel: "TA_JJA Teams Channel",
+			teamsChannel: teamsName,
 			language: "2",
 			type: "Andere",
 			openLevel: "530360002",
 			knowledgeGroup: "kennisgroep A (Development 1 - CTG)",
 			fundingChannel: "1003",
-			detailedFundingChannel: "HO_Docto",
+			detailedFundingChannel: "HO_Niet",
 		};
 
 		await this.assertPageTitle();

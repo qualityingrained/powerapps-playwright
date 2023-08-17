@@ -135,11 +135,18 @@ export class IdeaDetails {
 			.getByLabel("Budget Amount. Last saved value:")
 			.fill(amount);
 		await this.page.getByRole("menuitem", { name: "Save & Close" }).click();
+		await expect(
+			this.page
+				.frameLocator("#WebResource_FinanceUI")
+				.getByText(
+					"Unbudgeted6 666,00 €Sub Total6 666,00 €0,00 €0,00 €0,00 €",
+				),
+		).toBeVisible();
 	}
 
 	async createNewBudgetLine(channelCode: string, amount: string) {
-		await expect(this.btnNewFunding).toBeVisible({ timeout: 15000 });
-		await this.btnNewFunding.click();
+		await expect(this.btnNewFunding).toBeEnabled({ timeout: 15000 });
+		await this.page.waitForLoadState("load");
 		await this.btnNewFunding.click();
 		await this.newFunding_ifKnowledgeGroup.fill("kennisgroep B", {
 			timeout: 30000,
