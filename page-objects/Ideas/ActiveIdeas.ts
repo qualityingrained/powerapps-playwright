@@ -29,7 +29,7 @@ export class ActiveIdeas {
 		await this.page.keyboard.press("Enter");
 	}
 
-	async openIdea(rowNum: number) {
+	async openIdeaFromSearchResults(rowNum: number) {
 		const row = this.page.locator(`div[row-index="${rowNum}"]`);
 		await row.locator("a").first().click();
 	}

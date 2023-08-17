@@ -72,7 +72,7 @@ test("Create Idea", async ({ page }) => {
 
 	// verify creation & add budget
 	await activeIdeas.searchForIdea(teamsName);
-	await activeIdeas.openIdea(0);
+	await activeIdeas.openIdeaFromSearchResults(0);
 	await ideaDetails.assertIdeaDetails(testData);
 	await ideaDetails.navigateToFinances();
 	await ideaDetails.addBudgetToExistingLine(
@@ -91,14 +91,14 @@ test("Remove idea(s)", async ({ page }) => {
 	await sideMenu.navigateToIdeas();
 	await activeIdeas.searchForIdea(teamsName);
 
-	// Loop over idea's and remove each that matches the search results
+	// Loop over ideas and remove each that matches the search results
 	var stillData: number;
 	while (true) {
 		await helperFunctions.assertLoadingIconHidden();
 		if (await activeIdeas.isSearchResultsEmpty()) {
 			break;
 		}
-		await activeIdeas.openIdea(0);
+		await activeIdeas.openIdeaFromSearchResults(0);
 		await ideaDetails.removeIdea();
 		await activeIdeas.searchForIdea("TA_JJA Teams Channel");
 	}
