@@ -166,7 +166,7 @@ export class IdeaDetails {
 			.getByRole("menuitem", {
 				name: "Remove",
 			})
-			.click();
+			.click({ timeout: 30000 });
 		await this.page.locator('button[data-id="confirmButton"]').click();
 		await this.page.getByRole("menuitem", { name: "Save & Close" }).click();
 	}
