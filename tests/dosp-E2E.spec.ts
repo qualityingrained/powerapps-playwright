@@ -80,9 +80,6 @@ test("Create Idea", async ({ page }) => {
 		"6666",
 	);
 	await ideaDetails.createNewBudgetLine("1001", "9999");
-
-	// remove account
-	await ideaDetails.removeIdea();
 });
 
 test("Remove idea(s)", async ({ page }) => {
