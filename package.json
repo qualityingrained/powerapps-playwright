@@ -4,7 +4,7 @@
 	"description": "Test Automation - Playwright trial on PowerApps",
 	"main": "index.js",
 	"scripts": {
-		"test": "playwright test --config=playwright.config.ts --headed",
+		"test": "playwright test --config=playwright.config.ts --headed --workers=1",
 		"test:ci": "playwright test --config=playwright.config.ts",
 		"report": "playwright show-report"
 	},
@@ -12,7 +12,7 @@
 	"author": "Joren Janssens",
 	"license": "ISC",
 	"dependencies": {
-		"@playwright/test": "^1.36.2",
-		"prettier": "^3.0.0"
+		"@playwright/test": "^1.39.0",
+		"prettier": "^3.0.3"
 	}
 }
